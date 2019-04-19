@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-public class Thread {
+public class Comment {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;

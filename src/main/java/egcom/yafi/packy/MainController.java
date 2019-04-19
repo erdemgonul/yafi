@@ -54,10 +54,10 @@ public class MainController {
         return result;
     }
 
-    @PostMapping("/thread")
-    public Long createThread(@RequestBody CreateThreadDTO createThreadDTO) {
-        createThreadDTOValidator.validate(createThreadDTO);
-        Long result = mainService.createThread(createThreadDTO);
+    @PostMapping("/comment")
+    public Long createComment(@RequestBody CreateCommentDTO createCommentDTO) {
+        createThreadDTOValidator.validate(createCommentDTO);
+        Long result = mainService.createComment(createCommentDTO);
 
         return result;
     }

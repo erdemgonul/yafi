@@ -1,12 +1,12 @@
 package egcom.yafi.service;
 
 import egcom.yafi.dto.*;
-import egcom.yafi.entity.Thread;
+import egcom.yafi.entity.Comment;
 import egcom.yafi.entity.Topic;
 import egcom.yafi.entity.YafiUser;
 import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.packy.Role;
-import egcom.yafi.repo.ThreadRepo;
+import egcom.yafi.repo.CommentRepo;
 import egcom.yafi.repo.TopicRepo;
 import egcom.yafi.repo.YafiUserRepo;
 import egcom.yafi.util.Entity2DTO;
@@ -25,14 +25,14 @@ public class MainService {
 
     private final TopicRepo topicRepo;
     private final YafiUserRepo yafiUserRepo;
-    private final ThreadRepo threadRepo;
+    private final CommentRepo commentRepo;
     private final ActiveUserResolver activeUserResolver;
     private final Entity2DTO entity2DTO;
 
-    public MainService(TopicRepo topicRepo, YafiUserRepo yafiUserRepo, ThreadRepo threadRepo, ActiveUserResolver activeUserResolver) {
+    public MainService(TopicRepo topicRepo, YafiUserRepo yafiUserRepo, CommentRepo commentRepo, ActiveUserResolver activeUserResolver) {
         this.topicRepo = topicRepo;
         this.yafiUserRepo = yafiUserRepo;
-        this.threadRepo = threadRepo;
+        this.commentRepo = commentRepo;
         this.activeUserResolver = activeUserResolver;
         entity2DTO = new Entity2DTO();
     }
@@ -63,25 +63,25 @@ public class MainService {
         return yafiUser.getId();
     }
 
-    public Long createThread(CreateThreadDTO createThreadDTO) {
+    public Long createComment(CreateCommentDTO createCommentDTO) {
         YafiUser yafiUser = yafiUserRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
-        Optional<Topic> topic = topicRepo.findByName(createThreadDTO.topicName);
-        Thread thread = new Thread();
-        thread.setContent(createThreadDTO.content);
-        thread.setYafiUser(yafiUser);
-        thread.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + createThreadDTO.topicName + " does not exist")));
-        thread.setLikeCount(0L);
-        thread.setCreatedOn(LocalDateTime.now());
-        thread = threadRepo.save(thread);
+        Optional<Topic> topic = topicRepo.findByName(createCommentDTO.topicName);
+        Comment comment = new Comment();
+        comment.setContent(createCommentDTO.content);
+        comment.setYafiUser(yafiUser);
+        comment.setTopic(topic.orElseThrow( () -> new RuntimeException("Topic with name " + createCommentDTO.topicName + " does not exist")));
+        comment.setLikeCount(0L);
+        comment.setCreatedOn(LocalDateTime.now());
+        comment = commentRepo.save(comment);
 
-        return thread.getId();
+        return comment.getId();
     }
 
     public ThreadPageDTO readThreadsFromTopic(String topicName, PageRequest pageRequest) {
-        Page<Thread> threads = threadRepo.findAllByTopicNameOrderByCreatedOnAsc(topicName, pageRequest);
+        Page<Comment> threads = commentRepo.findAllByTopicNameOrderByCreatedOnAsc(topicName, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
-        for (Thread t: threads)
+        for (Comment t: threads)
             threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
 
         ThreadPageDTO threadPageDTO = new ThreadPageDTO();
@@ -92,10 +92,10 @@ public class MainService {
     }
 
     public ThreadPageDTO readThreadsFromUser(String username, PageRequest pageRequest) {
-        Page<Thread> threads = threadRepo.findAllByYafiUserUsernameOrderByCreatedOnAsc(username, pageRequest);
+        Page<Comment> threads = commentRepo.findAllByYafiUserUsernameOrderByCreatedOnAsc(username, pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
-        for (Thread t: threads)
+        for (Comment t: threads)
             threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
 
         ThreadPageDTO threadPageDTO = new ThreadPageDTO();
@@ -116,14 +116,14 @@ public class MainService {
     }
 
     public long likeThread(Long threadId) {
-        Optional<Thread> thread = threadRepo.findById(threadId);
+        Optional<Comment> thread = commentRepo.findById(threadId);
 
         if (!thread.isPresent())
-            throw new RuntimeException("Thread with id " + threadId + " doesn not exist");
+            throw new RuntimeException("Comment with id " + threadId + " doesn not exist");
         else {
-            Thread t = thread.get();
+            Comment t = thread.get();
             t.setLikeCount(t.getLikeCount() + 1);
-            threadRepo.save(t);
+            commentRepo.save(t);
 
             return t.getLikeCount();
         }
@@ -140,10 +140,10 @@ public class MainService {
     }
 
     public ThreadPageDTO readRecentThreads(PageRequest pageRequest) {
-        Page<Thread> threads = threadRepo.findFirst25ByOrderByCreatedOn_Desc(pageRequest);
+        Page<Comment> threads = commentRepo.findFirst25ByOrderByCreatedOn_Desc(pageRequest);
 
         ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
-        for (Thread t: threads)
+        for (Comment t: threads)
             threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
 
         ThreadPageDTO threadPageDTO = new ThreadPageDTO();

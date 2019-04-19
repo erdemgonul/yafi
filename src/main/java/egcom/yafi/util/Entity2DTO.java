@@ -2,7 +2,7 @@ package egcom.yafi.util;
 
 import egcom.yafi.dto.ThreadDTO;
 import egcom.yafi.dto.TopicDTO;
-import egcom.yafi.entity.Thread;
+import egcom.yafi.entity.Comment;
 import egcom.yafi.entity.Topic;
 import egcom.yafi.projection.PlainThread;
 
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Entity2DTO {
 
-    public ThreadDTO thread2ThreadDTO(Thread t) {
+    public ThreadDTO thread2ThreadDTO(Comment t) {
         ThreadDTO tDTO= new ThreadDTO();
         //tDTO.id = t.getId();
         tDTO.content = t.getContent();

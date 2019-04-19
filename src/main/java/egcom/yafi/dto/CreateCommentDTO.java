@@ -1,6 +1,6 @@
 package egcom.yafi.dto;
 
-public class CreateThreadDTO {
+public class CreateCommentDTO {
     public String content;
     public String topicName;
 }

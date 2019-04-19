@@ -75,11 +75,11 @@ public class MainServiceTest {
         CreateTopicDTO topicDTO = testFactory.createTopicDTO();
         service.createTopic(topicDTO);
 
-        CreateThreadDTO createThreadDTO = new CreateThreadDTO();
-        createThreadDTO.content = "this da content";
-        createThreadDTO.topicName = "topic1";
+        CreateCommentDTO createCommentDTO = new CreateCommentDTO();
+        createCommentDTO.content = "this da content";
+        createCommentDTO.topicName = "topic1";
 
-        Long result =service.createThread(createThreadDTO);
+        Long result =service.createComment(createCommentDTO);
 
         Assert.assertNotNull(result);
     }
@@ -92,11 +92,11 @@ public class MainServiceTest {
         CreateTopicDTO topicDTO = testFactory.createTopicDTO();
         service.createTopic(topicDTO);
 
-        CreateThreadDTO createThreadDTO = new CreateThreadDTO();
-        createThreadDTO.content = "this da content";
-        createThreadDTO.topicName = "topic1";
+        CreateCommentDTO createCommentDTO = new CreateCommentDTO();
+        createCommentDTO.content = "this da content";
+        createCommentDTO.topicName = "topic1";
 
-        Long threadId =service.createThread(createThreadDTO);
+        Long threadId =service.createComment(createCommentDTO);
 
         long actual = service.likeThread(threadId);
 

@@ -99,7 +99,7 @@
 					"raw": "{\n\t\"content\": \"content1\",\n\t\"topicName\": \"topic1\"\n}"
 				},
 				"url": {
-					"raw": "127.0.0.1:8080/thread",
+					"raw": "127.0.0.1:8080/comment",
 					"host": [
 						"127",
 						"0",
@@ -108,7 +108,7 @@
 					],
 					"port": "8080",
 					"path": [
-						"thread"
+						"comment"
 					]
 				}
 			},
