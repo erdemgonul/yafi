@@ -40,6 +40,7 @@ public class MainService {
     public Long createTopic(CreateTopicDTO createTopicDTO) {
         Topic topic = new Topic();
         topic.setName(createTopicDTO.name);
+        topic.setContent(createTopicDTO.content);
         YafiUser yafiUser = yafiUserRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
         topic.setYafiUser(yafiUser);
         topic.setCreatedOn(LocalDateTime.now());

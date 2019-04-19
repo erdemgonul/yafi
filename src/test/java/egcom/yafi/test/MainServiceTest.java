@@ -57,6 +57,7 @@ public class MainServiceTest {
         CreateTopicDTO topicDTO2 = new CreateTopicDTO();
 
         topicDTO2.name = "topic2";
+        topicDTO2.content = "content2";
 
         service.createTopic(topicDTO);
         service.createTopic(topicDTO2);

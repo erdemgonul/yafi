@@ -16,6 +16,7 @@ public class TestFactory {
     public CreateTopicDTO createTopicDTO() {
         CreateTopicDTO createTopicDTO = new CreateTopicDTO();
         createTopicDTO.name = "topic1";
+        createTopicDTO.content = "content1";
 
         return createTopicDTO;
     }

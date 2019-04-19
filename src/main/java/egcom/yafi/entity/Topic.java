@@ -15,6 +15,10 @@ public class Topic {
     @Column(unique = true)
     private String name;
 
+    @NotBlank
+    @Column
+    private String content;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "yafi_user_id")
@@ -28,6 +32,14 @@ public class Topic {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getName() {
