@@ -11,6 +11,7 @@ public class Comment {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @Column(length = 2048)
     @NotBlank
     private String content;
 
