@@ -104,19 +104,26 @@ public class MainController {
         return topicDTOs;
     }
 
+//    @GetMapping("/topics/recent")
+//    public List<TopicDTO> readMostRecentlyUpdatedTopics() {
+//        List<TopicDTO> topicDTOs = mainService.readMostRecentlyUpdatedTopics();
+//
+//        return topicDTOs;
+//    }
+
     @GetMapping("/topics/recent")
-    public List<TopicDTO> readMostRecentlyUpdatedTopics() {
-        List<TopicDTO> topicDTOs = mainService.readMostRecentlyUpdatedTopics();
+    public TopicPageDTO readRecentTopics(@RequestParam("page") int page) {
+        TopicPageDTO topicPageDTO = mainService.readRecentTopics(PageRequest.of(page, 25));
 
-        return topicDTOs;
+        return topicPageDTO;
     }
 
-    @GetMapping("/threads/recent")
-    public CommentPageDTO readRecentThreads(@RequestParam("page") int page) {
-        CommentPageDTO commentPageDTO = mainService.readRecentThreads(PageRequest.of(page, 25));
-
-        return commentPageDTO;
-    }
+//    @GetMapping("/threads/recent")
+//    public CommentPageDTO readRecentThreads(@RequestParam("page") int page) {
+//        CommentPageDTO commentPageDTO = mainService.readRecentThreads(PageRequest.of(page, 25));
+//
+//        return commentPageDTO;
+//    }
 
     @GetMapping("/topics/search")
     public List<TopicDTO> searchByTopicName(@RequestParam("topicName") String topicName) {

@@ -154,6 +154,20 @@ public class MainService {
         return topicDTOs;
     }
 
+    public TopicPageDTO readRecentTopics(PageRequest pageRequest) {
+        Page<Topic> topics = topicRepo.findFirst25ByOrderByCreatedOn_Desc(pageRequest);
+
+        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
+        for (Topic t: topics)
+            topicDTOs.add(entity2DTO.topic2TopicDTO(t));
+
+        TopicPageDTO topicPageDTO = new TopicPageDTO();
+        topicPageDTO.topicDTOs = topicDTOs;
+        topicPageDTO.totalPageCount = topics.getTotalPages();
+
+        return topicPageDTO;
+    }
+
     public CommentPageDTO readRecentThreads(PageRequest pageRequest) {
         Page<Comment> threads = commentRepo.findFirst25ByOrderByCreatedOn_Desc(pageRequest);
 

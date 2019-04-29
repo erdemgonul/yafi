@@ -312,7 +312,7 @@
 			"response": []
 		},
 		{
-			"name": "read_recent_threads",
+			"name": "read_recent_topics",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -321,7 +321,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "127.0.0.1:8080/threads/recent?page=0",
+					"raw": "127.0.0.1:8080/topics/recent?page=0",
 					"host": [
 						"127",
 						"0",
@@ -330,7 +330,7 @@
 					],
 					"port": "8080",
 					"path": [
-						"threads",
+						"topics",
 						"recent"
 					],
 					"query": [
