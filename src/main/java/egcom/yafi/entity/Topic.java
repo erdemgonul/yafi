@@ -24,6 +24,9 @@ public class Topic {
     @JoinColumn(name = "yafi_user_id")
     private YafiUser yafiUser;
 
+    @NotNull
+    private Long likeCount;
+
     private LocalDateTime createdOn;
 
     public Long getId() {
@@ -64,5 +67,13 @@ public class Topic {
 
     public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public Long getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
     }
 }

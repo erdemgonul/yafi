@@ -1,10 +1,10 @@
 package egcom.yafi.dto;
 
 public class CommentDTO {
-    public Long id;
+    public long id;
     public String content;
     public String topicName;
     public String username;
-    public Long likeCount;
+    public long likeCount;
     public String createdOn;
 }

@@ -13,7 +13,7 @@ public class Entity2DTO {
 
     public CommentDTO comment2CommentDTO(Comment t) {
         CommentDTO commentDTO= new CommentDTO();
-        //tDTO.id = t.getId();
+        commentDTO.id = t.getId();
         commentDTO.content = t.getContent();
         commentDTO.username = t.getYafiUser().getUsername();
         commentDTO.topicName = t.getTopic().getName();
@@ -25,6 +25,7 @@ public class Entity2DTO {
 
     public TopicDTO topic2TopicDTO(Topic t) {
         TopicDTO topicDTO = new TopicDTO();
+        topicDTO.id = t.getId();
         topicDTO.name = t.getName();
         topicDTO.createdBy = t.getYafiUser().getUsername();
         topicDTO.content = t.getContent();

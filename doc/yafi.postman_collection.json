@@ -85,8 +85,23 @@
 			"response": []
 		},
 		{
-			"name": "create_thread",
+			"name": "create_comment",
 			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -172,7 +187,7 @@
 			"response": []
 		},
 		{
-			"name": "like_thread",
+			"name": "like_comment",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -181,7 +196,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "127.0.0.1:8080/likethread/3",
+					"raw": "127.0.0.1:8080/comment/like/3",
 					"host": [
 						"127",
 						"0",
@@ -190,7 +205,8 @@
 					],
 					"port": "8080",
 					"path": [
-						"likethread",
+						"comment",
+						"like",
 						"3"
 					]
 				}
@@ -348,6 +364,55 @@
 					"path": [
 						"topic",
 						"topic1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "like_topic",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/topic/like/2",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"topic",
+						"like",
+						"2"
 					]
 				}
 			},

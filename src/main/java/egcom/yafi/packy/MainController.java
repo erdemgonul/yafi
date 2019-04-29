@@ -62,9 +62,16 @@ public class MainController {
         return result;
     }
 
-    @PostMapping("/likethread/{threadId}")
-    public Long likeThread(@PathVariable Long threadId) {
-        Long result = mainService.likeThread(threadId);
+    @PostMapping("/topic/like/{topicId}")
+    public Long likeTopic(@PathVariable Long topicId) {
+        Long result = mainService.likeTopic(topicId);
+
+        return result;
+    }
+
+    @PostMapping("/comment/like/{commentId}")
+    public Long likeComment(@PathVariable Long commentId) {
+        Long result = mainService.likeComment(commentId);
 
         return result;
     }

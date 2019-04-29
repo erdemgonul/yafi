@@ -44,6 +44,7 @@ public class MainService {
         YafiUser yafiUser = yafiUserRepo.findByUsername(activeUserResolver.getActiveUser().getUsername());
         topic.setYafiUser(yafiUser);
         topic.setCreatedOn(LocalDateTime.now());
+        topic.setLikeCount(0L);
         topic = topicRepo.save(topic);
 
         return topic.getId();
@@ -115,11 +116,25 @@ public class MainService {
         return topicDTOs;
     }
 
-    public long likeThread(Long threadId) {
-        Optional<Comment> thread = commentRepo.findById(threadId);
+    public long likeTopic(Long topicId) {
+        Optional<Topic> topic = topicRepo.findById(topicId);
+
+        if (!topic.isPresent())
+            throw new RuntimeException("Topic with id " + topicId + " doesn not exist");
+        else {
+            Topic t = topic.get();
+            t.setLikeCount(t.getLikeCount() + 1);
+            topicRepo.save(t);
+
+            return t.getLikeCount();
+        }
+    }
+
+    public long likeComment(Long commentId) {
+        Optional<Comment> thread = commentRepo.findById(commentId);
 
         if (!thread.isPresent())
-            throw new RuntimeException("Comment with id " + threadId + " doesn not exist");
+            throw new RuntimeException("Comment with id " + commentId + " doesn not exist");
         else {
             Comment t = thread.get();
             t.setLikeCount(t.getLikeCount() + 1);

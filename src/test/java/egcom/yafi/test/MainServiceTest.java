@@ -98,7 +98,7 @@ public class MainServiceTest {
 
         Long threadId =service.createComment(createCommentDTO);
 
-        long actual = service.likeThread(threadId);
+        long actual = service.likeComment(threadId);
 
         Assert.assertEquals(1, actual);
     }
