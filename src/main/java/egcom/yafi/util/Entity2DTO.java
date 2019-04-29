@@ -29,6 +29,7 @@ public class Entity2DTO {
         topicDTO.name = t.getName();
         topicDTO.createdBy = t.getYafiUser().getUsername();
         topicDTO.content = t.getContent();
+        topicDTO.likeCount = t.getLikeCount();
         topicDTO.createdOn = t.getCreatedOn();
 
         return topicDTO;
