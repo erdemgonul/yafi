@@ -1,6 +1,6 @@
 package egcom.yafi.util;
 
-import egcom.yafi.dto.ThreadDTO;
+import egcom.yafi.dto.CommentDTO;
 import egcom.yafi.dto.TopicDTO;
 import egcom.yafi.entity.Comment;
 import egcom.yafi.entity.Topic;
@@ -11,17 +11,16 @@ import java.time.format.DateTimeFormatter;
 
 public class Entity2DTO {
 
-    public ThreadDTO thread2ThreadDTO(Comment t) {
-        ThreadDTO tDTO= new ThreadDTO();
+    public CommentDTO comment2CommentDTO(Comment t) {
+        CommentDTO commentDTO= new CommentDTO();
         //tDTO.id = t.getId();
-        tDTO.content = t.getContent();
-        tDTO.username = t.getYafiUser().getUsername();
-        tDTO.topicName = t.getTopic().getName();
-        tDTO.likeCount = t.getLikeCount();
-        tDTO.createdOn = t.getCreatedOn().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        commentDTO.content = t.getContent();
+        commentDTO.username = t.getYafiUser().getUsername();
+        commentDTO.topicName = t.getTopic().getName();
+        commentDTO.likeCount = t.getLikeCount();
+        commentDTO.createdOn = t.getCreatedOn().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-        return tDTO;
-
+        return commentDTO;
     }
 
     public TopicDTO topic2TopicDTO(Topic t) {
@@ -39,8 +38,8 @@ public class Entity2DTO {
 //        return topicDTO;
 //    }
 
-    public ThreadDTO plainThread2ThreadDTO(PlainThread t) {
-        ThreadDTO tDTO= new ThreadDTO();
+    public CommentDTO plainThread2ThreadDTO(PlainThread t) {
+        CommentDTO tDTO= new CommentDTO();
         //tDTO.id = t.getId();
         tDTO.content = t.getContent();
         //tDTO.username = t.getYafiUser().getUsername();

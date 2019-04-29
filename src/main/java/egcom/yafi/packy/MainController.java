@@ -70,17 +70,17 @@ public class MainController {
     }
 
     @GetMapping("/topic/{topicName}")
-    public ThreadPageDTO readThreadsFromTopic(@PathVariable String topicName, @RequestParam("page") int page) {
-        ThreadPageDTO threadDTOs = mainService.readThreadsFromTopic(topicName,  PageRequest.of(page, 2));
+    public CommentPageDTO readCommentsFromTopic(@PathVariable String topicName, @RequestParam("page") int page) {
+        CommentPageDTO threadDTOs = mainService.readCommentsFromTopic(topicName,  PageRequest.of(page, 2));
 
         return threadDTOs;
     }
 
     @GetMapping("/thread/{username}")
-    public ThreadPageDTO readThreadsFromUser(@PathVariable String username, @RequestParam("page") int page) {
-        ThreadPageDTO threadPageDTO= mainService.readThreadsFromUser(username, PageRequest.of(page, 2));
+    public CommentPageDTO readThreadsFromUser(@PathVariable String username, @RequestParam("page") int page) {
+        CommentPageDTO commentPageDTO = mainService.readThreadsFromUser(username, PageRequest.of(page, 2));
 
-        return threadPageDTO;
+        return commentPageDTO;
     }
 
     @GetMapping("/topics")
@@ -98,10 +98,10 @@ public class MainController {
     }
 
     @GetMapping("/threads/recent")
-    public ThreadPageDTO readRecentThreads(@RequestParam("page") int page) {
-        ThreadPageDTO threadPageDTO = mainService.readRecentThreads(PageRequest.of(page, 25));
+    public CommentPageDTO readRecentThreads(@RequestParam("page") int page) {
+        CommentPageDTO commentPageDTO = mainService.readRecentThreads(PageRequest.of(page, 25));
 
-        return  threadPageDTO;
+        return commentPageDTO;
     }
 
     @GetMapping("/topics/search")

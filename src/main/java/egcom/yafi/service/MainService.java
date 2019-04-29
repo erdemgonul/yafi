@@ -77,32 +77,32 @@ public class MainService {
         return comment.getId();
     }
 
-    public ThreadPageDTO readThreadsFromTopic(String topicName, PageRequest pageRequest) {
+    public CommentPageDTO readCommentsFromTopic(String topicName, PageRequest pageRequest) {
         Page<Comment> threads = commentRepo.findAllByTopicNameOrderByCreatedOnAsc(topicName, pageRequest);
 
-        ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
+        ArrayList<CommentDTO> commentDTOS = new ArrayList<>();
         for (Comment t: threads)
-            threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
+            commentDTOS.add(entity2DTO.comment2CommentDTO(t));
 
-        ThreadPageDTO threadPageDTO = new ThreadPageDTO();
-        threadPageDTO.threadDTOs = threadDTOs;
-        threadPageDTO.totalPageCount = threads.getTotalPages();
+        CommentPageDTO commentPageDTO = new CommentPageDTO();
+        commentPageDTO.commentDTOs = commentDTOS;
+        commentPageDTO.totalPageCount = threads.getTotalPages();
 
-        return threadPageDTO;
+        return commentPageDTO;
     }
 
-    public ThreadPageDTO readThreadsFromUser(String username, PageRequest pageRequest) {
+    public CommentPageDTO readThreadsFromUser(String username, PageRequest pageRequest) {
         Page<Comment> threads = commentRepo.findAllByYafiUserUsernameOrderByCreatedOnAsc(username, pageRequest);
 
-        ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
+        ArrayList<CommentDTO> commentDTOS = new ArrayList<>();
         for (Comment t: threads)
-            threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
+            commentDTOS.add(entity2DTO.comment2CommentDTO(t));
 
-        ThreadPageDTO threadPageDTO = new ThreadPageDTO();
-        threadPageDTO.threadDTOs = threadDTOs;
-        threadPageDTO.totalPageCount = threads.getTotalPages();
+        CommentPageDTO commentPageDTO = new CommentPageDTO();
+        commentPageDTO.commentDTOs = commentDTOS;
+        commentPageDTO.totalPageCount = threads.getTotalPages();
 
-        return threadPageDTO;
+        return commentPageDTO;
     }
 
     public List<TopicDTO> readTopics() {
@@ -139,18 +139,18 @@ public class MainService {
         return topicDTOs;
     }
 
-    public ThreadPageDTO readRecentThreads(PageRequest pageRequest) {
+    public CommentPageDTO readRecentThreads(PageRequest pageRequest) {
         Page<Comment> threads = commentRepo.findFirst25ByOrderByCreatedOn_Desc(pageRequest);
 
-        ArrayList<ThreadDTO> threadDTOs = new ArrayList<>();
+        ArrayList<CommentDTO> commentDTOS = new ArrayList<>();
         for (Comment t: threads)
-            threadDTOs.add(entity2DTO.thread2ThreadDTO(t));
+            commentDTOS.add(entity2DTO.comment2CommentDTO(t));
 
-        ThreadPageDTO threadPageDTO = new ThreadPageDTO();
-        threadPageDTO.threadDTOs = threadDTOs;
-        threadPageDTO.totalPageCount = threads.getTotalPages();
+        CommentPageDTO commentPageDTO = new CommentPageDTO();
+        commentPageDTO.commentDTOs = commentDTOS;
+        commentPageDTO.totalPageCount = threads.getTotalPages();
 
-        return threadPageDTO;
+        return commentPageDTO;
     }
 
     public List<TopicDTO> searchByTopicName(String topicName) {

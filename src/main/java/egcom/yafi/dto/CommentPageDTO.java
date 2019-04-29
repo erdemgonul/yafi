@@ -2,7 +2,7 @@ package egcom.yafi.dto;
 
 import java.util.List;
 
-public class ThreadPageDTO {
-    public List<ThreadDTO> threadDTOs;
+public class CommentPageDTO {
+    public List<CommentDTO> commentDTOs;
     public int totalPageCount;
 }
