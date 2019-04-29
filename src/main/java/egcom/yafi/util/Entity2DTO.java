@@ -24,9 +24,11 @@ public class Entity2DTO {
     }
 
     public TopicDTO topic2TopicDTO(Topic t) {
-        TopicDTO topicDTO = new TopicDTO(t.getName());
-//        topicDTO.name = t.getName();
-//        topicDTO.createdBy = t.getYafiUser().getUsername();
+        TopicDTO topicDTO = new TopicDTO();
+        topicDTO.name = t.getName();
+        topicDTO.createdBy = t.getYafiUser().getUsername();
+        topicDTO.content = t.getContent();
+        topicDTO.createdOn = t.getCreatedOn();
 
         return topicDTO;
     }

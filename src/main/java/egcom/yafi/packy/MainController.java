@@ -70,11 +70,18 @@ public class MainController {
     }
 
     @GetMapping("/topic/{topicName}")
-    public CommentPageDTO readCommentsFromTopic(@PathVariable String topicName, @RequestParam("page") int page) {
-        CommentPageDTO threadDTOs = mainService.readCommentsFromTopic(topicName,  PageRequest.of(page, 2));
+    public TopicDTO readTopic(@PathVariable String topicName) {
+        TopicDTO topicDTO = mainService.readTopic(topicName);
 
-        return threadDTOs;
+        return topicDTO;
     }
+
+//    @GetMapping("/topic/{topicName}")
+//    public CommentPageDTO readCommentsFromTopic(@PathVariable String topicName, @RequestParam("page") int page) {
+//        CommentPageDTO threadDTOs = mainService.readCommentsFromTopic(topicName,  PageRequest.of(page, 2));
+//
+//        return threadDTOs;
+//    }
 
     @GetMapping("/thread/{username}")
     public CommentPageDTO readThreadsFromUser(@PathVariable String username, @RequestParam("page") int page) {

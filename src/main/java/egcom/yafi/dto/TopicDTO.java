@@ -1,11 +1,10 @@
 package egcom.yafi.dto;
 
-public class TopicDTO {
-    public final String name;
-    //public final String createdBy;
+import java.time.LocalDateTime;
 
-    public TopicDTO(String name) {
-        this.name = name;
-        //this.createdBy = createdBy;
-    }
+public class TopicDTO {
+    public String name;
+    public String content;
+    public String createdBy;
+    public LocalDateTime createdOn;
 }

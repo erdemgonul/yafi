@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "905f9a2e-4d6c-4901-a8e9-8968e9fbfeb5",
+		"_postman_id": "fc2367ea-e605-4a3a-80a3-b050a13d09cb",
 		"name": "yafi",
 		"description": "yet another forum",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -322,6 +322,32 @@
 							"key": "page",
 							"value": "0"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read_topic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/topic/topic1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"topic",
+						"topic1"
 					]
 				}
 			},

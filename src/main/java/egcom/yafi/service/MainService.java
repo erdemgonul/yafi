@@ -162,4 +162,12 @@ public class MainService {
 
         return topics;
     }
+
+    public TopicDTO readTopic(String topicName) {
+        Topic t = topicRepo.findByName(topicName).get();
+
+        TopicDTO topicDTO = entity2DTO.topic2TopicDTO(t);
+
+        return topicDTO;
+    }
 }
