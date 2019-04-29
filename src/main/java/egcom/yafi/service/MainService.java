@@ -183,13 +183,13 @@ public class MainService {
     }
 
     public List<TopicDTO> searchByTopicName(String topicName) {
-        List<TopicDTO> topics = topicRepo.findFirst10ByNameContainingOrderByNameAsc(topicName);
+        List<Topic> topics = topicRepo.findFirst10ByNameContainingOrderByNameAsc(topicName);
 
-//        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
-//        for (TopicOnly t: topics)
-//            topicDTOs.add(entity2DTO.topicOnly2TopicDTO(t));
+        ArrayList<TopicDTO> topicDTOs = new ArrayList<>();
+        for (Topic t: topics)
+            topicDTOs.add(entity2DTO.topic2TopicDTO(t));
 
-        return topics;
+        return topicDTOs;
     }
 
     public TopicDTO readTopic(String topicName) {

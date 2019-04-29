@@ -417,6 +417,38 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "search_topics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/topics/search?topicName=topic",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"topics",
+						"search"
+					],
+					"query": [
+						{
+							"key": "topicName",
+							"value": "topic"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -21,7 +21,7 @@ public interface TopicRepo extends JpaRepository<Topic, Long> {
             + " where x.topic_id = topic.id order by x.thread_created_on desc;", nativeQuery = true)
     List<Topic> readMostRecentlyUpdatedTopics();
 
-    List<TopicDTO> findFirst10ByNameContainingOrderByNameAsc(String topicName);
+    List<Topic> findFirst10ByNameContainingOrderByNameAsc(String topicName);
 
     //@EntityGraph(attributePaths = {"yafiUser", "topic"} ,type = EntityGraph.EntityGraphType.FETCH) //TODO: LEARN THIS
     Page<Topic> findFirst25ByOrderByCreatedOn_Desc(Pageable pageable);
