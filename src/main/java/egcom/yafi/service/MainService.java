@@ -1,16 +1,10 @@
 package egcom.yafi.service;
 
 import egcom.yafi.dto.*;
-import egcom.yafi.entity.Comment;
-import egcom.yafi.entity.LikeTopic;
-import egcom.yafi.entity.Topic;
-import egcom.yafi.entity.YafiUser;
+import egcom.yafi.entity.*;
 import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.packy.Role;
-import egcom.yafi.repo.CommentRepo;
-import egcom.yafi.repo.LikeTopicRepo;
-import egcom.yafi.repo.TopicRepo;
-import egcom.yafi.repo.YafiUserRepo;
+import egcom.yafi.repo.*;
 import egcom.yafi.util.Entity2DTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,15 +23,17 @@ public class MainService {
     private final YafiUserRepo yafiUserRepo;
     private final CommentRepo commentRepo;
     private final LikeTopicRepo likeTopicRepo;
+    private final LikeCommentRepo likeCommentRepo;
     private final ActiveUserResolver activeUserResolver;
     private final Entity2DTO entity2DTO;
 
     public MainService(TopicRepo topicRepo, YafiUserRepo yafiUserRepo, CommentRepo commentRepo, LikeTopicRepo likeTopicRepo,
-                       ActiveUserResolver activeUserResolver) {
+                       LikeCommentRepo likeCommentRepo, ActiveUserResolver activeUserResolver) {
         this.topicRepo = topicRepo;
         this.yafiUserRepo = yafiUserRepo;
         this.commentRepo = commentRepo;
         this.likeTopicRepo = likeTopicRepo;
+        this.likeCommentRepo = likeCommentRepo;
         this.activeUserResolver = activeUserResolver;
         entity2DTO = new Entity2DTO();
     }
@@ -155,16 +151,20 @@ public class MainService {
     }
 
     public long likeComment(Long commentId) {
-        Optional<Comment> thread = commentRepo.findById(commentId);
+        Optional<Comment> comment = commentRepo.findById(commentId);
 
-        if (!thread.isPresent())
+        if (!comment.isPresent())
             throw new RuntimeException("Comment with id " + commentId + " doesn not exist");
         else {
-            Comment t = thread.get();
-            t.setLikeCount(t.getLikeCount() + 1);
-            commentRepo.save(t);
+            Comment c = comment.get();
+            LikeComment likeComment = new LikeComment();
+            likeComment.setComment(c);
+            likeComment.setYafiUser(c.getYafiUser());
+            likeCommentRepo.save(likeComment);
+            c.setLikeCount(c.getLikeCount() + 1);
+            commentRepo.save(c);
 
-            return t.getLikeCount();
+            return c.getLikeCount();
         }
     }
 

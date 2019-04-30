@@ -47,7 +47,7 @@ public class Entity2DTO {
         //tDTO.id = t.getId();
         tDTO.content = t.getContent();
         //tDTO.username = t.getYafiUser().getUsername();
-        //tDTO.topicName = t.getTopic().getName();
+        //tDTO.topicName = t.getComment().getName();
         tDTO.likeCount = t.getLikeCount();
         //tDTO.createdOn = t.getCreatedOn().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
