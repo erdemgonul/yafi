@@ -16,7 +16,7 @@ public class Topic {
     private String name;
 
     @NotBlank
-    @Column(length = 2048)
+    @Column(length = 4096)
     private String content;
 
     @NotNull

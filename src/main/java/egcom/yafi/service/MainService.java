@@ -2,11 +2,13 @@ package egcom.yafi.service;
 
 import egcom.yafi.dto.*;
 import egcom.yafi.entity.Comment;
+import egcom.yafi.entity.LikeTopic;
 import egcom.yafi.entity.Topic;
 import egcom.yafi.entity.YafiUser;
 import egcom.yafi.packy.ActiveUserResolver;
 import egcom.yafi.packy.Role;
 import egcom.yafi.repo.CommentRepo;
+import egcom.yafi.repo.LikeTopicRepo;
 import egcom.yafi.repo.TopicRepo;
 import egcom.yafi.repo.YafiUserRepo;
 import egcom.yafi.util.Entity2DTO;
@@ -26,13 +28,16 @@ public class MainService {
     private final TopicRepo topicRepo;
     private final YafiUserRepo yafiUserRepo;
     private final CommentRepo commentRepo;
+    private final LikeTopicRepo likeTopicRepo;
     private final ActiveUserResolver activeUserResolver;
     private final Entity2DTO entity2DTO;
 
-    public MainService(TopicRepo topicRepo, YafiUserRepo yafiUserRepo, CommentRepo commentRepo, ActiveUserResolver activeUserResolver) {
+    public MainService(TopicRepo topicRepo, YafiUserRepo yafiUserRepo, CommentRepo commentRepo, LikeTopicRepo likeTopicRepo,
+                       ActiveUserResolver activeUserResolver) {
         this.topicRepo = topicRepo;
         this.yafiUserRepo = yafiUserRepo;
         this.commentRepo = commentRepo;
+        this.likeTopicRepo = likeTopicRepo;
         this.activeUserResolver = activeUserResolver;
         entity2DTO = new Entity2DTO();
     }
@@ -137,6 +142,11 @@ public class MainService {
             throw new RuntimeException("Topic with id " + topicId + " doesn not exist");
         else {
             Topic t = topic.get();
+
+            LikeTopic likeTopic = new LikeTopic();
+            likeTopic.setYafiUser(t.getYafiUser());
+            likeTopic.setTopic(t);
+            likeTopicRepo.save(likeTopic);
             t.setLikeCount(t.getLikeCount() + 1);
             topicRepo.save(t);
 
