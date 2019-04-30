@@ -11,6 +11,9 @@ public interface CommentRepo extends PagingAndSortingRepository<Comment, Long> {
     @EntityGraph(attributePaths = {"yafiUser", "topic"}, type=EntityGraph.EntityGraphType.LOAD)
     Page<Comment> findAllByTopicNameOrderByCreatedOnAsc(String name, Pageable pageable);
 
+    @EntityGraph(attributePaths = {"yafiUser", "topic"}, type=EntityGraph.EntityGraphType.LOAD)
+    Page<Comment> findAllByTopicIdOrderByCreatedOnAsc(Long topicId, Pageable pageable);
+
     Page<Comment> findAllByYafiUserUsernameOrderByCreatedOnAsc(String username, Pageable pageable);
 
     @EntityGraph(attributePaths = {"yafiUser", "topic"} ,type = EntityGraph.EntityGraphType.FETCH) //TODO: LEARN THIS

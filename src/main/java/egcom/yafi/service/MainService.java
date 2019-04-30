@@ -106,6 +106,20 @@ public class MainService {
         return commentPageDTO;
     }
 
+    public CommentPageDTO readCommentsFromTopic(Long topicId, PageRequest pageRequest) {
+        Page<Comment> threads = commentRepo.findAllByTopicIdOrderByCreatedOnAsc(topicId, pageRequest);
+
+        ArrayList<CommentDTO> commentDTOS = new ArrayList<>();
+        for (Comment t: threads)
+            commentDTOS.add(entity2DTO.comment2CommentDTO(t));
+
+        CommentPageDTO commentPageDTO = new CommentPageDTO();
+        commentPageDTO.commentDTOs = commentDTOS;
+        commentPageDTO.totalPageCount = threads.getTotalPages();
+
+        return commentPageDTO;
+    }
+
     public List<TopicDTO> readTopics() {
         List<Topic> topics = topicRepo.findAll();
 

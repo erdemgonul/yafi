@@ -449,6 +449,39 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "read_comments_from_topic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/comments/topic/2?page=0",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"comments",
+						"topic",
+						"2"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

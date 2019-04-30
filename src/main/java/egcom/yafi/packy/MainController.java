@@ -97,6 +97,13 @@ public class MainController {
         return commentPageDTO;
     }
 
+    @GetMapping("/comments/topic/{topicId}")
+    public CommentPageDTO readCommentsFromTopic(@PathVariable Long topicId, @RequestParam("page") int page) {
+        CommentPageDTO commentPageDTO = mainService.readCommentsFromTopic(topicId, PageRequest.of(page, 2));
+
+        return commentPageDTO;
+    }
+
     @GetMapping("/topics")
     public List<TopicDTO> readTopics() {
         List<TopicDTO> topicDTOs = mainService.readTopics();
