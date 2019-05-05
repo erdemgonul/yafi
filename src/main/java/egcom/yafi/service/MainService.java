@@ -11,8 +11,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +66,18 @@ public class MainService {
         yafiUser.setCreatedOn(LocalDateTime.now());
         yafiUser = yafiUserRepo.save(yafiUser);
 
+        try {
+            if (createUserDTO.base64ProfilePicture != null) {
+                byte[] decoded = Base64.getDecoder().decode(createUserDTO.base64ProfilePicture);
+                try (FileOutputStream fos = new FileOutputStream("profilePictures/" + createUserDTO.username + ".jpg")) {
+                    fos.write(decoded);
+                }
+            }
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
         return yafiUser.getId();
     }
 
@@ -79,20 +95,6 @@ public class MainService {
         return comment.getId();
     }
 
-    public CommentPageDTO readCommentsFromTopic(String topicName, PageRequest pageRequest) {
-        Page<Comment> threads = commentRepo.findAllByTopicNameOrderByCreatedOnAsc(topicName, pageRequest);
-
-        ArrayList<CommentDTO> commentDTOS = new ArrayList<>();
-        for (Comment t: threads)
-            commentDTOS.add(entity2DTO.comment2CommentDTO(t));
-
-        CommentPageDTO commentPageDTO = new CommentPageDTO();
-        commentPageDTO.commentDTOs = commentDTOS;
-        commentPageDTO.totalPageCount = threads.getTotalPages();
-
-        return commentPageDTO;
-    }
-
     public CommentPageDTO readThreadsFromUser(String username, PageRequest pageRequest) {
         Page<Comment> threads = commentRepo.findAllByYafiUserUsernameOrderByCreatedOnAsc(username, pageRequest);
 
@@ -108,15 +110,15 @@ public class MainService {
     }
 
     public CommentPageDTO readCommentsFromTopic(Long topicId, PageRequest pageRequest) {
-        Page<Comment> threads = commentRepo.findAllByTopicIdOrderByCreatedOnAsc(topicId, pageRequest);
+        Page<Comment> comments = commentRepo.findAllByTopicIdOrderByCreatedOnAsc(topicId, pageRequest);
 
         ArrayList<CommentDTO> commentDTOS = new ArrayList<>();
-        for (Comment t: threads)
+        for (Comment t: comments)
             commentDTOS.add(entity2DTO.comment2CommentDTO(t));
 
         CommentPageDTO commentPageDTO = new CommentPageDTO();
         commentPageDTO.commentDTOs = commentDTOS;
-        commentPageDTO.totalPageCount = threads.getTotalPages();
+        commentPageDTO.totalPageCount = comments.getTotalPages();
 
         return commentPageDTO;
     }

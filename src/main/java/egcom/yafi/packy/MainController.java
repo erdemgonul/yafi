@@ -8,6 +8,8 @@ import egcom.yafi.service.MainService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileOutputStream;
+import java.util.Base64;
 import java.util.List;
 
 @RestController
