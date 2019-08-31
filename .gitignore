@@ -1,4 +1,6 @@
 target/
+profilePictures/
+topicPictures/
 *.iml
 .idea/
 *.log

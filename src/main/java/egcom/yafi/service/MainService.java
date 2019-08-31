@@ -52,6 +52,18 @@ public class MainService {
         topic.setLikeCount(0L);
         topic = topicRepo.save(topic);
 
+        try {
+            if (createTopicDTO.base64encodedImg != null) {
+                byte[] decoded = Base64.getDecoder().decode(createTopicDTO.base64encodedImg);
+                try (FileOutputStream fos = new FileOutputStream("topicPictures/" + topic.getId() + ".jpg")) {
+                    fos.write(decoded);
+                }
+            }
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
         return topic.getId();
     }
 
